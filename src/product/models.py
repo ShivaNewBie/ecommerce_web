@@ -1,6 +1,8 @@
 from unicodedata import decimal
 from django.db import models
-
+from PIL import Image 
+from ast import Bytes
+from io import BytesIO
 # Create your models here.
 
 class Product(models.Model):
@@ -11,3 +13,8 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+    def get_absolute_url(self):
+        return f'/{self.id}/'
+    def get_image(self):
+        if self.image:
+            return 'http://127.0.0.1:8000' + self.image.url
