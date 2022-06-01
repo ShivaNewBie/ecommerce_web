@@ -5,6 +5,6 @@ from .models import Product
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('name','description','price','get_image')
+        fields = ('id','name','description','price','get_image','get_absolute_url')
 
 
