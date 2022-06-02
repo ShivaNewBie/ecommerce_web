@@ -1,7 +1,8 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ProductDetail from "../views/ProductDetail.vue";
-
+import Cart from "../views/Cart.vue";
+import { createArrayExpression } from "@vue/compiler-core";
 const routes = [
   {
     path: "/",
@@ -21,6 +22,11 @@ const routes = [
     path: "/:id/",
     name: "ProductDetail",
     component: ProductDetail,
+  },
+  {
+    path: "/cart",
+    name: "Cart",
+    component: Cart,
   },
 ];
 

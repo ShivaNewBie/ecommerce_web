@@ -30,7 +30,7 @@
         <li><router-link to="/">Sports</router-link></li>
         <li><router-link to="/">Fashion</router-link></li>
         <li><router-link to="/">My account</router-link></li>
-        <li><router-link to="/">Cart</router-link></li>
+        <li><router-link to="/cart">Cart</router-link></li>
       </ul>
     </nav>
   </div>

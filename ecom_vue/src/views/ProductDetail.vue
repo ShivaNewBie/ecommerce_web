@@ -60,7 +60,6 @@ export default {
         productdetail: this.productdetail,
         quantity: this.quantity,
       };
-      console.log(item);
       this.$store.commit("addToCart", item);
       toast({
         message: "The product was added to the cart",
