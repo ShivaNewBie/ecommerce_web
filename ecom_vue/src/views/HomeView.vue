@@ -13,16 +13,27 @@
     <div class="container-2">
       <div class="is-size-2 has-text-centered">Latest Products</div>
       <div class="sub-container">
-        <div class="box-1">
-          <div class="image-container">
-            <img
-              :src="require(`@/assets/erik-mclean-WIejoQqIvhE-unsplash.jpg`)"
-              alt=""
-            />
+        <div
+          v-for="product in productList"
+          v-bind:key="product.id"
+          v-bind:product="product"
+        >
+          <div class="box-1">
+            <div class="image-container">
+              <img v-bind:src="product.get_image" />
+              <!--to get localhost and url of image itself-->
+            </div>
+            <p>{{ product.name }}</p>
+            <p>{{ product.description }}</p>
+            <p>{{ product.price }}</p>
+            <router-link
+              v-bind:to="product.get_absolute_url"
+              class="button is-dark"
+              >View details</router-link
+            >
           </div>
-          <p>box 1</p>
         </div>
-        <div class="box-1">
+        <!-- <div class="box-1">
           <div class="image-container">
             <img
               :src="
@@ -50,7 +61,7 @@
             />
           </div>
           <p>box 4</p>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -62,10 +73,31 @@
 
 <script>
 // @ is an alias to /src
+import axios from "axios";
 
 export default {
   name: "HomeView",
-  components: {},
+  data() {
+    return {
+      productList: [],
+    };
+  },
+  mounted() {
+    this.getProductList();
+  },
+  methods: {
+    getProductList() {
+      axios
+        .get("/api/v1/product-list/")
+        .then((response) => {
+          this.productList = response.data;
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
 };
 </script>
 
@@ -106,7 +138,7 @@ export default {
 .box-1 {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
   background-color: #f1f1f1;
-  width: 20%;
+  min-width: 20%;
   padding: 16px;
   margin: auto;
 }
