@@ -47,13 +47,16 @@ export default {
   },
   methods: {
     async getProduct() {
+      const category_slug = this.$route.params.category_slug;
       const id = this.$route.params.id; //reference to vue router
 
-      await axios.get(`api/v1/product/${id}/`).then((response) => {
-        this.productdetail = response.data;
-        // console.log(response.data);
-        document.title = this.productdetail.name + " | Caps";
-      });
+      await axios
+        .get(`api/v1/product/${category_slug}/${id}/`)
+        .then((response) => {
+          this.productdetail = response.data;
+          console.log(response.data);
+          document.title = this.productdetail.name + " | Caps";
+        });
     },
     addToCart() {
       const item = {

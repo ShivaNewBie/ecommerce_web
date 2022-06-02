@@ -23,7 +23,7 @@ class Product(models.Model):
     def __str__(self):
         return self.name
     def get_absolute_url(self):
-        return f'/{self.id}/'
+        return f'/{self.category.slug}/{self.id}/'
     def get_image(self):
         if self.image:
             return 'http://127.0.0.1:8000' + self.image.url

@@ -27,8 +27,8 @@
         </form>
       </div>
       <ul class="nav-end">
-        <li><router-link to="/">Sports</router-link></li>
-        <li><router-link to="/">Fashion</router-link></li>
+        <li><router-link to="/sports">Sports</router-link></li>
+        <li><router-link to="/fashion">Fashion</router-link></li>
         <li><router-link to="/">My account</router-link></li>
         <li><router-link to="/cart">Cart</router-link></li>
       </ul>

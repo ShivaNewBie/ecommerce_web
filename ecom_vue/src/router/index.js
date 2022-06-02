@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ProductDetail from "../views/ProductDetail.vue";
 import Cart from "../views/Cart.vue";
+import Category from "../views/Category.vue";
+
 import { createArrayExpression } from "@vue/compiler-core";
 const routes = [
   {
@@ -19,7 +21,7 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
   {
-    path: "/:id/",
+    path: "/:category_slug/:id/",
     name: "ProductDetail",
     component: ProductDetail,
   },
@@ -27,6 +29,11 @@ const routes = [
     path: "/cart",
     name: "Cart",
     component: Cart,
+  },
+  {
+    path: "/:category_slug",
+    name: "Category",
+    component: Category,
   },
 ];
 

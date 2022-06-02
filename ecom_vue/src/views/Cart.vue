@@ -6,27 +6,42 @@
         <th>Price</th>
         <th>Quantity</th>
         <th>Total price</th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
-      <CartItem
-        v-for="item in cart.items"
-        v-bind:key="item.productdetail.id"
-        v-bind:initialItem="item"
-        v-on:removeFromCart="removeFromCart"
-      />
+      <tr v-for="item in cart.items" v-bind:key="item.productdetail.id">
+        <td>
+          <!-- <router-link :to="item.productdetail.get_absolute_url">{{
+        item.productdetail.name
+      }}</router-link> -->
+          <router-link
+            class="has-text-black"
+            :to="item.productdetail.get_absolute_url"
+            >{{ item.productdetail.name }}</router-link
+          >
+        </td>
+        <td>${{ item.productdetail.price }}</td>
+        <td>
+          {{ item.quantity }}
+          <button @click="decrementQuantity(item)">-</button>
+          <button @click="incrementQuantity(item)">+</button>
+        </td>
+        <td>${{ getItemTotal(item).toFixed(2) }}</td>
+        <td><button class="delete" @click="removeFromCart(item)"></button></td>
+      </tr>
     </tbody>
   </table>
   <p v-else>You don't have any products in your cart...</p>
 </template>
 
 <script>
-import CartItem from "@/components/CartItem.vue";
+// import CartItem from "@/components/CartItem.vue";
 
 export default {
   name: "Cart",
   components: {
-    CartItem,
+    // CartItem,
   },
   data() {
     return {
@@ -44,6 +59,28 @@ export default {
         (i) => i.productdetail.id !== item.productdetail.id
       );
     },
+    getItemTotal(item) {
+      return item.quantity * item.productdetail.price;
+    },
+    decrementQuantity(item) {
+      item.quantity -= 1;
+      if (item.quantity === 0) {
+        this.$emit("removeFromCart", item);
+      }
+      this.updateCart();
+    },
+    incrementQuantity(item) {
+      item.quantity += 1;
+      this.updateCart();
+    },
+    updateCart() {
+      localStorage.setItem("cart", JSON.stringify(this.$store.state.cart));
+    },
+    // removeFromCart(item) {
+    //   this.$emit("removeFromCart", item);
+    //   this.updateCart();
+    //   console.log(item);
+    // },
   },
   computed: {
     cartTotalLength() {
@@ -60,6 +97,9 @@ export default {
 };
 </script>
 <style>
+a {
+  color: inherit;
+}
 .content-table {
   border-collapse: collapse;
   margin: 25px 0;
