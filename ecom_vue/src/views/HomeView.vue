@@ -12,11 +12,13 @@
     </div>
     <div class="container-2">
       <div class="is-size-2 has-text-centered">Latest Products</div>
-      <ProductList
-        v-for="product in productList"
-        v-bind:key="product.id"
-        v-bind:product="product"
-      />
+      <div class="sub-container">
+        <ProductList
+          v-for="product in productList"
+          v-bind:key="product.id"
+          v-bind:product="product"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -25,15 +27,16 @@
 // @ is an alias to /src
 import axios from "axios";
 import ProductList from "@/components/ProductList";
+
 export default {
   name: "HomeView",
+  components: {
+    ProductList,
+  },
   data() {
     return {
       productList: [],
     };
-  },
-  components: {
-    ProductList,
   },
   mounted() {
     this.getProductList();
@@ -83,27 +86,8 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
 .sub-container {
   display: flex;
   justify-content: space-between;
-}
-.box-1 {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
-  background-color: #f1f1f1;
-  min-width: 20%;
-  padding: 16px;
-  margin: auto;
-}
-.box-1 img {
-  height: 100%;
-  width: 100%;
-  object-fit: cover;
-  margin: auto;
-}
-.image-container {
-  height: 300px;
-  width: 200px;
-  margin: auto;
 }
 </style>
