@@ -12,75 +12,28 @@
     </div>
     <div class="container-2">
       <div class="is-size-2 has-text-centered">Latest Products</div>
-      <div class="sub-container">
-        <div
-          v-for="product in productList"
-          v-bind:key="product.id"
-          v-bind:product="product"
-        >
-          <div class="box-1">
-            <div class="image-container">
-              <img v-bind:src="product.get_image" />
-              <!--to get localhost and url of image itself-->
-            </div>
-            <p>{{ product.name }}</p>
-            <p>{{ product.description }}</p>
-            <p>{{ product.price }}</p>
-            <router-link
-              v-bind:to="product.get_absolute_url"
-              class="button is-dark"
-              >View details</router-link
-            >
-          </div>
-        </div>
-        <!-- <div class="box-1">
-          <div class="image-container">
-            <img
-              :src="
-                require(`@/assets/claudio-schwarz-PH8GUKG-Do0-unsplash.jpg`)
-              "
-              alt=""
-            />
-          </div>
-          <p>box 2</p>
-        </div>
-        <div class="box-1">
-          <div class="image-container">
-            <img
-              :src="require(`@/assets/dave-goudreau-FEx5z_k0hss-unsplash.jpg`)"
-              alt=""
-            />
-          </div>
-          <p>box 3</p>
-        </div>
-        <div class="box-1" id="sad">
-          <div class="image-container">
-            <img
-              :src="require(`@/assets/erik-mclean-WIejoQqIvhE-unsplash.jpg`)"
-              alt=""
-            />
-          </div>
-          <p>box 4</p>
-        </div> -->
-      </div>
+      <ProductList
+        v-for="product in productList"
+        v-bind:key="product.id"
+        v-bind:product="product"
+      />
     </div>
   </div>
-  <br />
-  <br />
-  <br />
-  <br />
 </template>
 
 <script>
 // @ is an alias to /src
 import axios from "axios";
-
+import ProductList from "@/components/ProductList";
 export default {
   name: "HomeView",
   data() {
     return {
       productList: [],
     };
+  },
+  components: {
+    ProductList,
   },
   mounted() {
     this.getProductList();

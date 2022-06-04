@@ -25,7 +25,7 @@ class ProductDetail(APIView):
     def get(self,request,category_slug, id,format=None):
         product = self.get_object(category_slug,id)
         serializer = ProductSerializer(product)
-        return Response(serializer.data) 
+        return Response(serializer.data)    
 
 
 class CategoryDetail(APIView):

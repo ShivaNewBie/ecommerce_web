@@ -5,7 +5,7 @@
         <h2 class="is-size-2 has-text-centered">{{ category.name }}</h2>
       </div>
 
-      <ProductBox
+      <ProductList
         v-for="product in category.products"
         v-bind:key="product.id"
         v-bind:product="product"
@@ -18,11 +18,11 @@
 import axios from "axios";
 import { toast } from "bulma-toast";
 
-import ProductBox from "@/components/ProductBox";
+import ProductList from "@/components/ProductList";
 export default {
   name: "Category",
   components: {
-    ProductBox,
+    ProductList,
   },
   data() {
     return {
