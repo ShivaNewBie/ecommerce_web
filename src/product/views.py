@@ -1,6 +1,8 @@
 from django.http import Http404
 from django.shortcuts import render
 
+from rest_framework.permissions import IsAuthenticated
+
 # Create your views here.
 from rest_framework.views import APIView 
 from rest_framework.response import Response
@@ -11,6 +13,8 @@ from product.serializers import ProductSerializer, CategorySerializer
 from .models import Product,Category
 
 class ProductListView(APIView):
+    # permission_classes = [IsAuthenticated]
+
     def get(self,request,format=None):
         products = Product.objects.all()
         serializers = ProductSerializer(products,many=True)

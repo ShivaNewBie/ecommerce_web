@@ -28,7 +28,6 @@ export default {
   background-color: #f1f1f1;
   min-width: 20%;
   padding: 16px;
-  margin: auto;
 }
 .box-1 img {
   height: 100%;

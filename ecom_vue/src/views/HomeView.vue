@@ -27,7 +27,6 @@
 // @ is an alias to /src
 import axios from "axios";
 import ProductList from "@/components/ProductList";
-
 export default {
   name: "HomeView",
   components: {
@@ -43,6 +42,8 @@ export default {
   },
   methods: {
     getProductList() {
+      this.$store.commit("setIsLoading", true);
+
       axios
         .get("/api/v1/product-list/")
         .then((response) => {
@@ -52,6 +53,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.$store.commit("setIsLoading", false);
     },
   },
 };

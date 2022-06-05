@@ -3,6 +3,9 @@ import HomeView from "../views/HomeView.vue";
 import ProductDetail from "../views/ProductDetail.vue";
 import Cart from "../views/Cart.vue";
 import Category from "../views/Category.vue";
+import Login from "../views/Login.vue";
+import Signup from "../views/Signup.vue";
+import MyAccount from "../views/MyAccount.vue";
 
 import { createArrayExpression } from "@vue/compiler-core";
 const routes = [
@@ -35,6 +38,21 @@ const routes = [
     name: "Category",
     component: Category,
   },
+  {
+    path: "/log-in",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/signup",
+    name: "Signup",
+    component: Signup,
+  },
+  {
+    path: "/my-account",
+    name: "MyAccount",
+    component: MyAccount,
+  },
 ];
 
 const router = createRouter({
@@ -42,4 +60,15 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to, from, next) => {
+  //user should be logged in order to access the url or component
+  if (
+    to.matched.some((record) => record.meta.requireLogin) &&
+    !store.state.isAuthenticated
+  ) {
+    next("/log-in");
+  } else {
+    next();
+  }
+});
 export default router;
