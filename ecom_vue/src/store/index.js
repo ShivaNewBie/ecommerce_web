@@ -3,10 +3,8 @@ import { createStore } from "vuex";
 export default createStore({
   state: {
     isLoading: false,
-
     token: "",
     isAuthenticated: false,
-
     user: {
       id: 0,
       username: "",
@@ -18,12 +16,18 @@ export default createStore({
   mutations: {
     initializeStore(state) {
       //this function only inializes an if statement not change any data rather it checks whether the data is authenticated
+      if (localStorage.getItem("cart")) {
+        state.cart = JSON.parse(localStorage.getItem("cart"));
+      } else {
+        localStorage.setItem("cart", JSON.stringify(state.cart));
+      }
+
       if (localStorage.getItem("token")) {
-        //token determines if the user is authenticated
         state.token = localStorage.getItem("token");
         state.isAuthenticated = true;
-        state.user.username = localStorage.getItem("username");
-        state.user.id = localStorage.getItem("userid");
+      } else {
+        state.token = "";
+        state.isAuthenticated = false;
       }
     },
     addToCart(state, item) {
@@ -46,9 +50,14 @@ export default createStore({
     },
     setToken(state, token) {
       state.token = token;
+      state.isAuthenticated = true;
     },
     setUser(state, user) {
       state.user = user;
+    },
+    removeToken(state) {
+      state.token = "";
+      state.isAuthenticated = false;
     },
   },
   actions: {},

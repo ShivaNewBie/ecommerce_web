@@ -27,6 +27,9 @@
 
 <script>
 import axios from "axios";
+
+import { toast } from "bulma-toast";
+
 export default {
   name: "Login",
   data() {
@@ -55,7 +58,8 @@ export default {
           axios.defaults.headers.common["Authorization"] = "Token " + token;
 
           localStorage.setItem("token", token);
-          this.$router.push("/my-account");
+          const toPath = this.$route.query.to || "/cart";
+          this.$router.push(toPath);
         })
         .catch((error) => {
           if (error.response) {
@@ -77,6 +81,7 @@ export default {
           localStorage.setItem("username", response.data.username);
           localStorage.setItem("userid", response.data.id);
         })
+
         .catch((error) => {
           console.log(error);
         });

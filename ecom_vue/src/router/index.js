@@ -7,6 +7,8 @@ import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import MyAccount from "../views/MyAccount.vue";
 
+import store from "../store";
+
 import { createArrayExpression } from "@vue/compiler-core";
 const routes = [
   {
@@ -39,7 +41,7 @@ const routes = [
     component: Category,
   },
   {
-    path: "/log-in",
+    path: "/login",
     name: "Login",
     component: Login,
   },
@@ -52,6 +54,9 @@ const routes = [
     path: "/my-account",
     name: "MyAccount",
     component: MyAccount,
+    meta: {
+      requireLogin: true,
+    },
   },
 ];
 
@@ -61,14 +66,14 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  //user should be logged in order to access the url or component
   if (
     to.matched.some((record) => record.meta.requireLogin) &&
     !store.state.isAuthenticated
   ) {
-    next("/log-in");
+    next({ name: "Login", query: { to: to.path } });
   } else {
     next();
   }
 });
+
 export default router;

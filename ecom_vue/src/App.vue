@@ -27,20 +27,24 @@
         </form>
       </div>
       <ul class="nav-end">
-        <template v-if="$store.state.isAuthenticated">
+        <div class="nice">
           <li><router-link to="/sports">Sports</router-link></li>
           <li><router-link to="/fashion">Fashion</router-link></li>
 
           <li><router-link to="/cart">Cart</router-link></li>
-        </template>
-        <template v-if="!$store.state.isAuthenticated">
-          <li><router-link to="/log-in">Log- in</router-link></li>
-          <li><router-link to="/signup">Signup</router-link></li>
-        </template>
-        <template v-else>
+        </div>
+        <template class="nice" v-if="$store.state.isAuthenticated">
           <li>
             <router-link to="/my-account">My account</router-link>
           </li>
+
+          <li>
+            <button class="button is-danger" @click="logout()">Logout</button>
+          </li>
+        </template>
+        <template v-else>
+          <li><router-link to="/login">Log- in</router-link></li>
+          <li><router-link to="/signup">Signup</router-link></li>
         </template>
       </ul>
     </nav>
@@ -70,6 +74,25 @@ export default {
       axios.defaults.headers.common["Authorization"] = "";
     }
   },
+  methods: {
+    async logout() {
+      await axios
+        .post("api/v1/token/logout/")
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      axios.defaults.headers.common["Authorization"] = "";
+      localStorage.removeItem("token");
+      localStorage.removeItem("username");
+      localStorage.removeItem("userid");
+      this.$store.commit("removeToken");
+
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -95,7 +118,9 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
+.nice {
+  display: inline-block;
+}
 .nav-start .test {
   display: inline-block;
   // padding: 0px 20px;
@@ -108,12 +133,14 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 a {
   color: #ffffff;
 }
 .nav-end li {
   display: inline-block; //side by side list
   padding-right: 20px;
+  vertical-align: middle;
 }
 .lds-dual-ring {
   display: inline-block;

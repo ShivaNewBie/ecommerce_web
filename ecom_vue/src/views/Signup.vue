@@ -69,6 +69,7 @@ export default {
         .catch((error) => {
           if (error.response) {
             for (const property in error.response.data) {
+              console.log(error.response.data);
               this.errors.push(`${property}: ${error.response.data[property]}`);
             }
           } else if (error.message) {
