@@ -16,6 +16,9 @@
           <div class="input-field">
             <input type="password" placeholder="Password" v-model="password" />
           </div>
+          <div class="notification is-danger" v-if="errors.length">
+            <p v-for="error in errors" v-bind:key="error">{{ error }}</p>
+          </div>
         </div>
         <div class="action">
           <button>Log in</button>
