@@ -59,6 +59,7 @@ export default {
         });
     },
     addToCart() {
+      //this is where our cart gets data
       const item = {
         productdetail: this.productdetail,
         quantity: this.quantity,

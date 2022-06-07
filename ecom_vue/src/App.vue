@@ -31,7 +31,9 @@
           <li><router-link to="/sports">Sports</router-link></li>
           <li><router-link to="/fashion">Fashion</router-link></li>
 
-          <li><router-link to="/cart">Cart</router-link></li>
+          <li>
+            <router-link to="/cart">Cart: {{ cartTotalLength }} </router-link>
+          </li>
         </div>
         <template class="nice" v-if="$store.state.isAuthenticated">
           <li>
@@ -62,6 +64,13 @@
 import axios from "axios";
 export default {
   name: "App",
+  data() {
+    return {
+      cart: {
+        items: [],
+      },
+    };
+  },
   beforeCreate() {
     //before code will run
     this.$store.commit("initializeStore"); //the commit will make initializeStore run or use the function
@@ -74,9 +83,22 @@ export default {
       axios.defaults.headers.common["Authorization"] = "";
     }
   },
+  mounted() {
+    this.cart = this.$store.state.cart;
+  },
+  computed: {
+    cartTotalLength() {
+      let totalLength = 0;
+
+      for (let i = 0; i < this.cart.items.length; i++) {
+        totalLength += this.cart.items[i].quantity;
+      }
+      return totalLength;
+    },
+  },
   methods: {
-    async logout() {
-      await axios
+    logout() {
+      axios
         .post("api/v1/token/logout/")
         .then((response) => {
           console.log(response);
@@ -121,6 +143,7 @@ export default {
 .nice {
   display: inline-block;
 }
+
 .nav-start .test {
   display: inline-block;
   // padding: 0px 20px;

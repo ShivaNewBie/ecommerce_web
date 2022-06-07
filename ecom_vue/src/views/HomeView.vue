@@ -5,6 +5,14 @@
         class="home-pic"
         :src="require(`@/assets/hossein-azarbad-AP_qief3n94-unsplash.jpg`)"
       />
+      <img
+        class="home-pic"
+        :src="require(`@/assets/hossein-azarbad-AP_qief3n94-unsplash.jpg`)"
+      />
+      <img
+        class="home-pic"
+        :src="require(`@/assets/hossein-azarbad-AP_qief3n94-unsplash.jpg`)"
+      />
       <div class="welcome">
         <p class="title mb-6 has-text-white">Welcome to caps</p>
         <p class="subtitle has-text-white">The best caps store online</p>
@@ -64,18 +72,24 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 80%;
   height: 500px;
   padding-top: 30px;
+  width: 30%;
 }
 
 .container-1 {
   position: relative;
-  text-align: center;
+  /* text-align: center; */
   color: white;
   margin-bottom: 45px;
+  display: flex;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
 }
-
+.container-1 img {
+  flex: 1;
+}
 .welcome {
   position: absolute;
   top: 50%;
