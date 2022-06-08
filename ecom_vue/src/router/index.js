@@ -6,6 +6,7 @@ import Category from "../views/Category.vue";
 import Login from "../views/Login.vue";
 import Signup from "../views/Signup.vue";
 import MyAccount from "../views/MyAccount.vue";
+import CheckOut from "../views/CheckOut.vue";
 
 import store from "../store";
 
@@ -54,6 +55,14 @@ const routes = [
     path: "/my-account",
     name: "MyAccount",
     component: MyAccount,
+    meta: {
+      requireLogin: true,
+    },
+  },
+  {
+    path: "/checkout",
+    name: "CheckOut",
+    component: CheckOut,
     meta: {
       requireLogin: true,
     },

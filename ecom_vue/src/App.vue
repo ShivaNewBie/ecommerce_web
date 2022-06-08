@@ -92,6 +92,7 @@ export default {
 
       for (let i = 0; i < this.cart.items.length; i++) {
         totalLength += this.cart.items[i].quantity;
+        console.log(this.cart.items[i].quantity); //we get quantity object then add 1
       }
       return totalLength;
     },

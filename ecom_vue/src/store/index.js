@@ -34,7 +34,7 @@ export default createStore({
       const exists = state.cart.items.filter(
         (i) => i.productdetail.id === item.productdetail.id
       );
-      console.log(exists.length);
+      // console.log(exists.length);
       if (exists.length) {
         exists[0].quantity =
           parseInt(exists[0].quantity) + parseInt(item.quantity);
@@ -43,7 +43,7 @@ export default createStore({
       }
 
       localStorage.setItem("cart", JSON.stringify(state.cart));
-      console.log(localStorage);
+      // console.log(localStorage);
     },
     setIsLoading(state, status) {
       state.isLoading = status;
