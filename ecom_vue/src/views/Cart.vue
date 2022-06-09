@@ -1,38 +1,55 @@
 <template>
-  <table class="content-table" v-if="cartTotalLength">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>Quantity</th>
-        <th>Total price</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in cart.items" v-bind:key="item.productdetail.id">
-        <td>
-          <!-- <router-link :to="item.productdetail.get_absolute_url">{{
-        item.productdetail.name
-      }}</router-link> -->
-          <router-link
-            class="has-text-black"
-            :to="item.productdetail.get_absolute_url"
-            >{{ item.productdetail.name }}</router-link
-          >
-        </td>
-        <td>${{ item.productdetail.price }}</td>
-        <td>
-          {{ item.quantity }}
-          <button @click="decrementQuantity(item)">-</button>
-          <button @click="incrementQuantity(item)">+</button>
-        </td>
-        <td>${{ getItemTotal(item).toFixed(2) }}</td>
-        <td><button class="delete" @click="removeFromCart(item)"></button></td>
-      </tr>
-    </tbody>
-  </table>
-  <p v-else>You don't have any products in your cart...</p>
+  <div class="cart-container">
+    <table class="content-table" v-if="cartTotalLength">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Total price</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in cart.items" v-bind:key="item.productdetail.id">
+          <td>
+            <!-- <router-link :to="item.productdetail.get_absolute_url">{{
+          item.productdetail.name
+        }}</router-link> -->
+            <router-link
+              class="has-text-black"
+              :to="item.productdetail.get_absolute_url"
+              >{{ item.productdetail.name }}</router-link
+            >
+          </td>
+          <td>${{ item.productdetail.price }}</td>
+          <td>
+            {{ item.quantity }}
+            <button @click="decrementQuantity(item)">-</button>
+            <button @click="incrementQuantity(item)">+</button>
+          </td>
+          <td>${{ getItemTotal(item).toFixed(2) }}</td>
+          <td>
+            <button class="delete" @click="removeFromCart(item)"></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p v-else class="test-width">You don't have any products in your cart...</p>
+    <div class="cart-container-2">
+      <h2 class="subtitle">Summary</h2>
+
+      <!-- <strong>${{ cartTotalPrice }}</strong
+      >, {{ cartTotalLength }} items -->
+
+      <hr />
+
+      <router-link to="/checkout" class="button is-dark"
+        >Proceed to checkout</router-link
+      >
+    </div>
+  </div>
 </template>
 
 <script>
@@ -100,9 +117,16 @@ export default {
 a {
   color: inherit;
 }
+.cart-container {
+  width: 80%;
+  margin: auto;
+}
+.cart-container-2 {
+  width: 100%;
+}
 .content-table {
   border-collapse: collapse;
-  margin: 25px 0;
+  margin: auto;
   font-size: 0.9em;
   width: 100%;
   border-radius: 5px 5px 0 0;
@@ -137,5 +161,8 @@ a {
 .content-table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
+}
+.checkout-button {
+  float: right;
 }
 </style>

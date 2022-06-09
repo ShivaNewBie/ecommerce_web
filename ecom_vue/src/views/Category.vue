@@ -49,7 +49,7 @@ export default {
         .then((response) => {
           this.category = response.data;
           console.log(response.data);
-          document.title = this.category.name + " | Djackets";
+          document.title = this.category.name + " | Caps";
         })
         .catch((error) => {
           console.log(error);

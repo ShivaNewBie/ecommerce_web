@@ -101,11 +101,30 @@
       </div>
     </div>
   </div>
+  <!-- {{ cartTotalPrice.toFixed(2) }} -->
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "CheckOut",
+  data() {
+    return {
+      cart: {
+        items: [],
+      },
+    };
+  },
+  mounted() {
+    this.cart = this.$store.state.cart.items;
+  },
+  // computed: {
+  //   cartTotalPrice() {
+  //     return this.cart.items.reduce((acc, curVal) => {
+  //       return (acc += curVal.product.price * curVal.quantity);
+  //     }, 0);
+  //   },
+  // },
 };
 </script>
 
