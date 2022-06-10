@@ -22,11 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4^k26!36qc*f5a(gxw$*&&0@viev_f2ysycn84ctas7jehx+_6'
 
+STRIPE_SECRET_KEY = 'sk_test_51L98YoApSiyfBEVON6l8wrd2tlWvlvkLn0wGE0EIzyfVTJUajY8NkQEmVUx0E2Q06r4S9BCCochaHEoeayACuzqa00t08WgCrQ'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
