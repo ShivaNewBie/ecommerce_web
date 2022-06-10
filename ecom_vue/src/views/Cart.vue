@@ -40,8 +40,8 @@
     <div class="cart-container-2">
       <h2 class="subtitle">Summary</h2>
 
-      <!-- <strong>${{ cartTotalPrice }}</strong
-      >, {{ cartTotalLength }} items -->
+      <strong>${{ cartTotalPrice.toFixed(2) }}</strong
+      >, {{ cartTotalLength.toFixed(2) }} items
 
       <hr />
 
@@ -106,8 +106,9 @@ export default {
       }, 0);
     },
     cartTotalPrice() {
+      //always check object name got stuck here should be productdetail not product
       return this.cart.items.reduce((acc, curVal) => {
-        return (acc += curVal.product.price * curVal.quantity);
+        return (acc += curVal.productdetail.price * curVal.quantity);
       }, 0);
     },
   },
