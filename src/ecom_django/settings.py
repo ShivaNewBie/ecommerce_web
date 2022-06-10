@@ -46,7 +46,7 @@ INSTALLED_APPS = [
 
     #own
     'product',
-    'checkout'
+    'order'
 ]
 
 CORS_ALLOWED_ORIGINS = [
